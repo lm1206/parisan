@@ -505,7 +505,7 @@ G=\frac{1}{1-(a_ie^{-ikj\Delta h}+b_i+c_ie^{ikj\Delta h})}
 \caption{累计型向上敲出看涨巴黎期权}
 \end{minipage}
 \end{figure}
-与布朗运动相比，在分数布朗运动的模型中，连续型与累计型巴黎期权的价格都有处明显的区别。首先表现为峰值下降并向左移动，其次是两侧曲面的下滑速度减满。这是因为当参数$H>0.5$的时候，分数布朗运动具有长期依赖性，认为未来的增长趋势将延长过去的增长趋势。因此当$S$增长至接近障碍价格的时候，分数布朗运动认为.....
+与布朗运动相比，在分数布朗运动的模型中，连续型与累计型巴黎期权的价格都有处明显的区别。首先表现为峰值下降并向左移动，其次是两侧曲面的下滑速度减满。
 
 \begin{figure}[H]
 \begin{minipage}{0.48\linewidth}
@@ -517,7 +517,7 @@ G=\frac{1}{1-(a_ie^{-ikj\Delta h}+b_i+c_ie^{ikj\Delta h})}
 \caption{累计型向上敲出看涨巴黎期权}
 \end{minipage}
 \end{figure}
-固定时间值$t$，同样能看到，相比布朗运动，分数布朗运动下巴黎期权价格的峰值向左移动，而相比连续型巴黎期权，累计型巴黎期权价格的峰值还随着计时器的增加而减小。
+固定时间值$t$，同样能看到，相比布朗运动，分数布朗运动下巴黎期权价格的峰值向左移动，而相比连续型巴黎期权，累计型巴黎期权价格还随着计时器的增加而更快地减小。
 
 考虑参数股价$S$在不同的参数$H$下对连续型向上敲出巴黎期权价格的影响
 \begin{figure}[H]
@@ -527,7 +527,7 @@ G=\frac{1}{1-(a_ie^{-ikj\Delta h}+b_i+c_ie^{ikj\Delta h})}
 \caption{$S$与$V$的关系图}
 \end{center}
 \end{figure}
-由图\ref{paris_fbm}可以看出，随着分数布朗运动的参数$H$的增加，标的资产的长期依赖型增加，巴黎期权的峰值减少并向$S$减小的方向移动。
+由图\ref{paris_fbm}可以看出，随着分数布朗运动的参数$H$的增加，标的资产的长期依赖性增强。股票的历史价格对股票未来走势的预测性增强，未来的不确定性减弱，整个巴黎期权价格的图像就会由陡峭逐渐变得肥胖。
 
 
 \subsection{更广泛的高斯过程}
@@ -541,9 +541,9 @@ G=\frac{1}{1-(a_ie^{-ikj\Delta h}+b_i+c_ie^{ikj\Delta h})}
  $\alpha$&$\gamma$&$F_t$ & $U_t$ \\
 \hline
 $1$&$1$&$t$ & $1$ \\
-$0.8$&$1$ & $0.8t$ & $0.8$ \\
-$1$&$0.8$ & $5t^{1.8}/9$ & $t^{0.8}$ \\
-$0.8$&$0.8$&$4t^{1.8}/9$ & $0.8t^{0.8}$ \\
+$0.7$&$1$ & $0.7t$ & $0.7$ \\
+$1$&$0.7$ & $t^{1.7}/1.7$ & $t^{0.7}$ \\
+$0.7$&$0.7$&$0.7t^{1.7}/1.7$ & $0.7t^{0.7}$ \\
 \hline
 \end{tabular}
 \end{table}
@@ -551,29 +551,41 @@ $0.8$&$0.8$&$4t^{1.8}/9$ & $0.8t^{0.8}$ \\
 
 \begin{figure}[H]
 \begin{minipage}{0.48\linewidth}
-\includegraphics[width=8.5cm]{code/paris_cfbm1.jpg}
-\caption{连续型向上敲出看涨巴黎期权}
+\label{ut}
+\includegraphics[width=8.5cm]{code/ut.jpg}
+\caption{$U_t$的函数图}
 \end{minipage}
 \begin{minipage}{0.48\linewidth}
-\includegraphics[width=8.5cm]{code/parisc_cfbm1.jpg}
-\caption{累计型向上敲出看涨巴黎期权}
+\label{mg1}
+\includegraphics[width=8.5cm]{code/mg1.jpg}
+\caption{连续型向上敲出看涨巴黎期权价格(d=0.01)}
 \end{minipage}
 \end{figure}
-
-
-
-布朗运动同样也是次分数布朗运动的当$H=0.5$的特殊情况。下面考虑当$W_t$为次分数布朗运动时，不同参数$H$，对巴黎期权价格的影响。使用隐式差分法所得到的连续型和累计型向上敲出看涨巴黎期权价格分别为
+如图\ref{ut}所示，当$t=0.7$的时候，有$0.7t^0.7<0.5<t^0.7<1$；当$t=0.5$的时候，有$0.7t^0.7<t^0.7<0.5<1$。观察巴黎期权的图像\ref{mg1}，可以看出对于不同参数$\alpha$，$gamma$的高斯过程，巴黎期权
 
 \begin{figure}[H]
 \begin{minipage}{0.48\linewidth}
-\includegraphics[width=8.5cm]{code/paris_cfbm2.jpg}
-\caption{连续型向上敲出看涨巴黎期权}
+\includegraphics[width=8.5cm]{code/bt0.5.jpg}
+\caption{连续型向上敲出看涨巴黎期权价格（t=0.5）}
 \end{minipage}
 \begin{minipage}{0.48\linewidth}
-\includegraphics[width=8.5cm]{code/parisc_cfbm2.jpg}
-\caption{累计型向上敲出看涨巴黎期权}
+\includegraphics[width=8.5cm]{code/bt0.7.jpg}
+\caption{连续型向上敲出看涨巴黎期权价格（t=0.7）}
 \end{minipage}
 \end{figure}
+
+\begin{figure}[H]
+\begin{minipage}{0.48\linewidth}
+\includegraphics[width=8.5cm]{code/t0.5.jpg}
+\caption{S与V的关系图（t=0.5）}
+\end{minipage}
+\begin{minipage}{0.48\linewidth}
+\includegraphics[width=8.5cm]{code/t0.7.jpg}
+\caption{S与V的关系图（t=0.7）}
+\end{minipage}
+\end{figure}
+
+
 
 
 
