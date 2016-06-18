@@ -492,7 +492,7 @@ G=\frac{1}{1-(a_ie^{-ikj\Delta h}+b_i+c_ie^{ikj\Delta h})}
 \end{minipage}
 \end{figure}
 固定时间$t$，对比连续型和累计型向上巴黎期权的价格(如图 \ref{paris2}和\ref{parisc2})，累计型巴黎期权的峰值明显低于连续型巴黎期权并且随着计时值$\tau$的增加而快速下降。
-
+\iffalse
 \subsection{分数布朗运动}
 布朗运动为分数布朗运动的当$H=0.5$的特殊情况。下面考虑当$W_t$为分数布朗运动时，不同参数$H$，对巴黎期权价格的影响。使用隐式差分法所得到的连续型和累计型向上敲出看涨巴黎期权价格分别为
 \begin{figure}[H]
@@ -528,10 +528,10 @@ G=\frac{1}{1-(a_ie^{-ikj\Delta h}+b_i+c_ie^{ikj\Delta h})}
 \end{center}
 \end{figure}
 由图\ref{paris_fbm}可以看出，随着分数布朗运动的参数$H$的增加，标的资产的长期依赖性增强。股票的历史价格对股票未来走势的预测性增强，未来的不确定性减弱，整个巴黎期权价格的图像就会由陡峭逐渐变得肥胖。
+\fi
 
-
-\subsection{更广泛的高斯过程}
-观察方程\eqref{hcon1}和\eqref{hcon2}，不同的高斯过程，影响的只有方程中的参数$U_n$，即协方差函数的导函数$U_t$。为了更一般性的研究不同的高斯过程对巴黎期权价格的影响，我们假设$U_t$可以写成$t$的幂指数的形式$U_t=\alpha t^\gamma$。下面考虑不同的参数$\alpha$和$\gamma$对连续型向上敲出看涨巴黎期权价格的影响。
+\subsection{一般的高斯过程}
+观察方程\eqref{hcon1}和\eqref{hcon2}，不同的高斯过程，影响巴黎期权的只有方程中的参数$U_n$，即协方差函数的导函数$U_t$。为了更一般性地研究不同的高斯过程对巴黎期权价格的影响，我们假设$U_t$可以写成$t$的幂指数的形式$U_t=\alpha t^\gamma$。下面考虑不同的参数$\alpha$和$\gamma$对连续型向上敲出看涨巴黎期权价格的影响。
 \begin{table}[htbp]
 \centering
 \caption{高斯过程的协方差函数}
