@@ -462,9 +462,10 @@ G=\frac{1}{1-(a_ie^{-ikj\Delta h}+b_i+c_ie^{ikj\Delta h})}
 \end{equation}
 因此$|G|<1$，由vonNeuman准则知此隐式差分格式绝对稳定。即差分方程的稳定性不受网格剖分的影响。
 
-\section{实例}
+\section{算例例}
 \subsection{布朗运动}
-选取参数$L=12$，$D=0.1$，$E=10$，$T=1$，$\sigma=0.2$，$r=0.05$，$q=0$。当$W_t$为布朗运动时，使用隐式差分法所得到的连续型和累计型向上敲出看涨巴黎期权价格分别为
+选取参数$L=12$，$D=0.1$，$E=10$，$T=1$，$\sigma=0.2$，$r=0.05$，$q=0$。当$W_t$为布朗运动时，使用隐式差分法所得到的连续型和累计型向上敲出看涨巴黎期权价格分别如图\ref{paris2}和图\ref{parisc2}所示
+\iffalse
 \begin{figure}[H]
 \begin{minipage}{0.48\linewidth}
 \label{paris1}
@@ -477,8 +478,8 @@ G=\frac{1}{1-(a_ie^{-ikj\Delta h}+b_i+c_ie^{ikj\Delta h})}
 \caption{累计型向上敲出看涨巴黎期权}
 \end{minipage}
 \end{figure}
-图\ref{paris1}和\ref{parisc1}分别为连续型和累计型向上巴黎期权的价格。从整体的图形上两者的图形是相似的，对于任意$\tau$，最大值都是出现$S=10$处。并且随着$t$越接近终点$T$,其最大值越大。只是同样参数下 ，累计型巴黎期权的价格比连续型巴黎期权的价格更低。由于连续型巴黎期权只有当标的资产超过障碍水平的时候计时器才会开始计时，否者归零，因此\ref{paris1}只有在右侧当$S>12$时，才会随着$\tau$增加而下降；而累积型巴黎期权的计时器不会归零，因此\ref{parisc1}中，整个图形都会随着$\tau$增加而下降。
-
+而由于连续型巴黎期权只有当标的资产超过障碍水平的时候计时器才会开始计时，否者归零，因此\ref{paris1}只有在右侧当$S>12$时，才会随着$\tau$增加而下降；而累积型巴黎期权的计时器不会归零，因此\ref{parisc1}中，整个图形都会随着$\tau$增加而下降。
+\fi
 \begin{figure}[H]
 \begin{minipage}{0.48\linewidth}
 \label{paris2}
@@ -491,7 +492,7 @@ G=\frac{1}{1-(a_ie^{-ikj\Delta h}+b_i+c_ie^{ikj\Delta h})}
 \caption{累计型向上敲出看涨巴黎期权}
 \end{minipage}
 \end{figure}
-固定时间$t$，对比连续型和累计型向上巴黎期权的价格(如图 \ref{paris2}和\ref{parisc2})，累计型巴黎期权的峰值明显低于连续型巴黎期权并且随着计时值$\tau$的增加而快速下降。
+对比连续型和累计型向上巴黎期权的价格(如图 \ref{paris2}和\ref{parisc2})，整体的图形上两者的是相似的，对于任意$\tau$，最大值都是出现$S=10$处。而同样参数下 ， 由于累计型巴黎期权中计时器不清理，因此其敲出的可能性更大，从而价格比连续型巴黎期权的价格更低，并且随着计时值$\tau$的增加而快速下降。
 \iffalse
 \subsection{分数布朗运动}
 布朗运动为分数布朗运动的当$H=0.5$的特殊情况。下面考虑当$W_t$为分数布朗运动时，不同参数$H$，对巴黎期权价格的影响。使用隐式差分法所得到的连续型和累计型向上敲出看涨巴黎期权价格分别为
@@ -505,7 +506,7 @@ G=\frac{1}{1-(a_ie^{-ikj\Delta h}+b_i+c_ie^{ikj\Delta h})}
 \caption{累计型向上敲出看涨巴黎期权}
 \end{minipage}
 \end{figure}
-与布朗运动相比，在分数布朗运动的模型中，连续型与累计型巴黎期权的价格都有处明显的区别。首先表现为峰值下降并向左移动，其次是两侧曲面的下滑速度减满。
+与布朗运动相比，在分数布朗运动的模型中，连续型与累计型巴黎期权的价格都有处明显的区别。首先表现为峰值下降并向左移动，其次是两侧曲面的下滑速度减满慢。
 
 \begin{figure}[H]
 \begin{minipage}{0.48\linewidth}
@@ -531,11 +532,12 @@ G=\frac{1}{1-(a_ie^{-ikj\Delta h}+b_i+c_ie^{ikj\Delta h})}
 \fi
 
 \subsection{更广泛的高斯过程}
-观察方程\eqref{hcon1}和\eqref{hcon2}，不同的高斯过程，影响的只有方程中的参数$U_n$，即协方差函数的导函数$U_t$。为了更一般性的研究不同的高斯过程对巴黎期权价格的影响，我们假设$U_t$可以写成$t$的幂指数的形式$U_t=\alpha t^\gamma$。下面考虑不同的参数$\alpha$和$\gamma$对连续型向上敲出看涨巴黎期权价格的影响。
-\begin{table}[!htbp]
+观察方程\eqref{hcon1}和\eqref{hcon2}，不同的高斯过程，影响的只有方程中的参数$U_n$，即协方差函数的导函数$U_t$。为了更一般性的研究不同的高斯过程对巴黎期权价格的影响，我们假设$U_t$为$t$的幂指数的形式$U_t=\alpha t^\gamma$。下面考虑如表\ref{t1}中的不同的数$\alpha$和$\gamma$对连续型和累计型向上敲出看涨巴黎期权价格的影响。
+\begin{table}[tbh!]
+\begin{minipage}{0.48\textwidth}
+\caption{算例使用的协方差函数}
 \centering
-\caption{高斯过程的协方差函数}
-\label{tabl2}
+\label{t1}
 \begin{tabular}{c|c|c|c}
 \hline
  $\alpha$&$\gamma$&$F_t$ & $U_t$ \\
@@ -545,15 +547,18 @@ $0.7$&$1$ & $0.7t$ & $0.7$ \\
 $1.4$&$0.4$ & $t^{1.4}$ & $1.4t^{0.4}$ \\
 \hline
 \end{tabular}
-\end{table}
-
+\end{minipage}
+\begin{minipage}{0.48\textwidth}
+\centering
 \begin{figure}[H]
 \label{ut}
 \centering
-\includegraphics[width=10cm]{code/ut.jpg}
+\includegraphics[width=8cm]{code/ut.jpg}
 \caption{$U_t$的函数图}
 \end{figure}
-
+\end{minipage}
+\end{table}
+\iffalse
 \begin{figure}[H]
 \label{mg1}
 \begin{minipage}{0.48\linewidth}
@@ -565,10 +570,10 @@ $1.4$&$0.4$ & $t^{1.4}$ & $1.4t^{0.4}$ \\
 \caption{累计型向上敲出看涨巴黎期权价格(d=0.01)}
 \end{minipage}
 \end{figure}
-
-如图\ref{ut}所示，当$t=0.7$的时候，有$0.7t^0.7<0.5<t^{0.7}<1$；当$t=0.5$的时候，有$0.7t^0.7<t^0.7<0.5<1$。观察巴黎期权的图像\ref{mg1}，可以看出对于不同参数$\alpha$，$gamma$的高斯过程，巴黎期权
+\fi
 
 \begin{figure}[H]
+\label{mg2}
 \begin{minipage}{0.48\linewidth}
 \includegraphics[width=8.5cm]{code/mg2.jpg}
 \caption{连续型向上敲出看涨巴黎期权价格(t=0.5)}
@@ -578,7 +583,7 @@ $1.4$&$0.4$ & $t^{1.4}$ & $1.4t^{0.4}$ \\
 \caption{累计型向上敲出看涨巴黎期权价格(t=0.5)}
 \end{minipage}
 \end{figure}
-
+如图\ref{ut}所示，当$t=0.7$的时候，有$0.7t^0.7<0.5<t^{0.7}<1$；当$t=0.5$的时候，有$0.7t^0.7<t^0.7<0.5<1$。观察巴黎期权的图像\ref{mg2}，可以看出对于不同参数$\alpha$，$gamma$的高斯过程，巴黎期权
 \begin{figure}[H]
 \begin{minipage}{0.48\linewidth}
 \includegraphics[width=8.5cm]{code/t0.5.jpg}
