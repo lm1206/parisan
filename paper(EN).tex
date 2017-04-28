@@ -28,8 +28,18 @@
 \newtheorem{proposition}[definition]{\hspace{2em}命题} 
 \newtheorem{corollary}[definition]{\hspace{2em}推论} 
 \newtheorem{remark}{\hspace{2em}注}[section] %类似地定义其他“题头”. 这里“注”的编号与定义、定理等是分开的
+
+
+
+
 \begin{document}
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
 \begin{titlepage}
+
 \newcommand{\HRule}{\rule{\linewidth}{0.5mm}} % Defines a new command for the horizontal lines, change thicjness here
 
 \center % Center everything on the page
@@ -39,7 +49,7 @@
 %%\textsc{\large Minor Heading}\\[0.5cm] % Minor heading such as course title
 
 \HRule \\[0.4cm]
-{ \huge \bfseries 基于高斯过程的巴黎期权定价问题}\\[0.4cm] % Title of your document
+{ \huge \bfseries Pricing Parisian options under a Gaussian process}\\[0.4cm] % Title of your document
 \HRule \\[1.5cm]
 
 \begin{minipage}{0.4\textwidth}
@@ -63,30 +73,37 @@ Mathematics
 \end{titlepage}
 \newpage
 %\begin{abstract}
-本文将巴黎期权的定价模型拓展到一般的高斯过程以适应更多的资产运动模型假设。通过利用Wick-Ito积分，推导出一般高斯过程下连续型和累计型巴黎期权价格的偏微分方程并构造无条件稳定的隐式差分格式，并且提出使用计算量较小的追赶法进行方程组的求解。通过对不同高斯过程下的连续型和累计型巴黎期权价格进行算例分析，可以看出，任何高斯过程下，累计型巴黎期权由于计时器不清零，因此敲出的可能性更大，价格比相应的连续型巴黎期权更低。而影响巴黎期权价格的变量只有高斯过程的方程函是，其方差函数增长越缓慢，波动性越小，盈亏的预测性就越强，计算得到的巴黎期权价格的函数图像就会更陡峭，峰值更高。
+This study extends the Parisian option pricing model to general Gaussian processes to adapt more asset pricing model assumptions. This study uses a Wick-Ito integral to derive the consecutive and cumulative Parisian option pricing PDEs under Gaussian processes and construct an unconditionally stable implicit difference scheme. Additionally, a numerical method with efficient computation, namely, a chasing algorithm, is used to solve the pricing problem. When analysing the example of the price of consecutive and cumulative Parisian options under any Gaussian process, because the counter is not zero, the cumulative Parisian option is more likely a knock-out option, and the price is lower than that of the consecutive Parisian option. The variables that affect the prices of the Parisian option under a Gaussian process are a slow-growing variance function, smaller volatility, more likely profit and loss forecasts, steeper graph of the price of the Parisian option, and higher peak value.
 
-{\bf 关键词: }巴黎期权，高斯过程，追赶法，布朗运动，隐式差分方程
+{\bf Key Words: }Parisian Option, Gaussian Process, Chasing Algorithm, Brownian Motion, Implicit Difference Equations
 %\end{abstract}
 
-\section{引言}
-巴黎期权是一种强路径依赖期权(path-dependent option)，该合约允许持有人在股票价格于到期日前按照规定的价格向上(向下)累计或连续停留一段预先设定的时间(持续时间)，以预先约定的价格买入或卖出相应的股票。根据持续时间的类型，可分为累积巴黎期权(cumulative Parisian option)与连续巴黎期权(consecutive Parisian option)。累积巴黎期权是指股票价格需要累积在障碍价格之上(之下)停留一段时间才允许敲入或敲出；连续巴黎期权是指股票价格连续在障碍价格之上(之下)停留预先设定的一段时间才允许敲入或敲出。由于累积巴黎期权的条件比连续巴黎期权更容易触发障碍价格，对敲出期权(knock-out option)来说，其价格要高于累积巴黎期权，对敲入期权(knock-in option)来说则正好相反。巴黎期权主要应用于外汇市场以及混合金融衍生品的定价。例如，外汇巴黎期权能够减少汇率变化对期权价格带来的影响，从而有效规避市场参与者的投机行为；可转换债券中的回售、赎回、转换等条款均含有巴黎期权的特征。
+\section{Introduction}
+A Parisian option is a complex, path-dependent option that can be classified as cumulative or consecutive depending on the duration time. A consecutive Parisian option is the price of an underlying asset with a required barrier level that is continuous and can remain for some time; it can knock-in or knock-out above or below the barrier. A cumulative Parisian option is an asset price that needs to accumulate above or below the barrier level for some time to knock-in or knock-out with an optional maturity time as the limit. For every knock-in or knock-out time, it continues to accumulate after the pre-setting time. The pre-setting time determines whether the option is triggered. A cumulative Parisian option is more likely to trigger the barrier level than a consecutive Parisian option, depending on the option conditions. In the knock-out option, the price of a consecutive Parisian option is higher than that of the cumulative Parisian option; it is opposite for the knock-in option. The Parisian option is mainly used in the foreign exchange market and can have hybrid derivative pricing. For example, the foreign exchange Parisian option can reduce the impact of the exchange rate; it changes option prices to avoid market speculation. In a convertible bond, conversion and redemption clauses contain Parisian option features.
 
-目前关于巴黎期权定价的主要方法有概率方法与偏微分方程(PDE)方法。Haber等在Black-Scholes期权定价的框架下，通过股价、持续时间、终端时间这三个变量推导了巴黎期权定价的偏微分方程，并运用显式差分法(explicit difference method)进行求解，但是该数值方法的收敛速度较慢，且稳定性较差。罗俊和吴雄华利用初值的奇性消除技术对两点中心隐式差分格式进行了修正，以提高巴黎期权定价的运算效率。宋斌等在Haber等的基础上，重新定义了巴黎期权偏微分方程的定解空间，并用隐式差分法(implicit difference method)对巴黎期权进行了定价，该数值方法收敛速度快，且稳定性较好。Kwok和Lau在三叉树模型的框架下，用向前打靶网格法(forward shooting grid)对累计、连续以及移动窗口巴黎期权进行了定价。Lonstaff和Schwartz首次利用最小二乘蒙特卡罗(Least-square Monte Carlo)对美式巴黎期权进行了计算。宋斌和井帅在连续时间的框架下分别用最小二乘蒙特卡罗、向前打靶网格法以及有限差分法(finite difference method)对含有自由边界的美式巴黎期权进行了计算。
+The main methods for pricing Parisian options are the probability method and the partial differential equation (PDE) method. Under the framework of Black-Scholes option pricing, Haber, Schonbucher and Wilmott (1999) derived the PDE for a Parisian option using stock price, duration time and terminal time. These three variables were used with an explicit difference method to solve the problem; however, this numerical method converges slowly, and its stability is not good. Anderluha (2008) fixed the boundary and terminal conditions to find the Parisian option PDE using a hitting time simulation to price consecutive and cumulative Parisian options. Kowk and Lau (2001) priced consecutive and cumulative Parisian options by using a forward-shooting grid under a trinomial tree framework. Longstaff and Schwartz (2001) used a least-square Monte Carlo method to price the American-style Parisian option.\\
 
-\section{高斯过程}
-高斯过程是一种普遍存在和重要的随机过程。一个高斯过程完全由它的均值函数和协方差函数决定，只要均值函数$E(W_t)$和协方差函数$E(W_t,W_s)$确定了，这个高斯过程也就完全确定了。设$\{W_t\}_{t\geq 0}$为概率空间$(\Omega,F,P)$上的一个具有独立增量的高斯过程，$W_0=0$，且满足
-\begin{enumerate}[(1)]
-\item 均值$E(W_t)=0$，$t\geq 0$
-\item 协方差$E(W_t,W_s)=F(t,s)<\infty$，$t,s\geq 0$
-\end{enumerate}
+These models assume that the Parisian option’s underlying asset price follows geometric Brownian motion. However, Dai and Singleton (2000), via an empirical study of the financial markets, suggest that the change in financial asset price is not a random walk but has varying degrees of long-range dependence and auto-correlation. A financial asset logarithm yields a fat-tail distribution rather than a normal distribution. Peters (1989) noted that the fractional market hypothesis uses an R/S algorithm to detect differences in financial markets and shows that fractional and non-cyclical structures exist in financial markets; these characteristics are significantly different from geometric Brownian motion. Instead, fractional, bi-fractional and sub-fractional Brownian motion describe long-range dependence and auto-correlation very well and yield a fat-tail distribution (Xiao et al., 2012; Lei and Nualart, 2009; Yan, Shen and He, 2011). \\
 
-当$F(t,s)=t\wedge s$时，$W_t$即为标准布朗运动。 当$F(t,s)=1/2(t^{2H}+s^{2H}-|t-s|^{2H})$时，$W_t$为Hurst参数为$H$的分数布朗运动。当$H\in(0,1/2)$时增量负相关，$W_t$具有短期依赖性，表现为反持久性，即未来的增长趋势与过去趋势相反；当$H\in(1/2,1)$，$W_t$具有长期依赖性，表现为持久性，即未来的增长趋势将延长过去的增长趋势。双分数布朗运动的协方差函数为$F(t,s)=1/2^K[(t^{2H}+s^{2H})^K-|t-s|^{2HK}]$。它不仅具有分数布朗运动的自相似性和长记忆性等性质，而且当$2HK=1$时，$W_t$为一个半鞅。
+This paper analyses the PDE of consecutive and cumulative Parisian options under various Gaussian processes. First, by introducing the Wick-Ito integral, we construct the PDE for a financial derivative under a complete financial market with no arbitrage opportunity. Then, we set up the boundary and initial conditions for consecutive and cumulative Parisian options under a general Gaussian process. To solve the PDE, we construct numerical difference equations and introduce the chasing algorithm to reduce the complexity of the calculations. Finally, we examine a case study in which we introduce various Gaussian processes into our model and analyse the influence of the parameters.
 
-次分数布朗运动，同样也具有自相似性和长记忆性，Yan Litan等给出了次分数布朗运动的随机积分，并指出次分数布朗运动可以用来刻画金融资产的随机波动性，对应的协方差为$F(t,s)=t^{2H}+s^{2H}-1/2(|t+s|^{2H}+|t-s|^{2H})$。
 
-混合分数布朗运动为布朗运动和分数布朗运动的线性组合，$W_t=\alpha B_t+\beta B_t^H$，其中$B_t$为布朗运动，$B_t^H$为布朗运动，$\alpha,\beta \in R$。协方差函数为$F(t,s)=\alpha^2(t\wedge s)+\beta(t^{2H}+s^{2H}-|t-s|^{2H})/2$。
+\section{Gaussian Process}
+The financial market is a complex system, and most investors do not have access to adequate information. Investors gain profits while taking risks. In the efficient market hypothesis, noise is defined as the deviation between the price and the value of financial assets. Most investors are noise traders: they normally treat noise information as factual information to trade. Information traders use noise-trader-characteristics to make profits due to a herd mentality. This introduces market excess and volatility, which leads to market volatility clustering. Similar yields on different time scales with similar distributions of frequency, such as auto-correlation in time scales, results from new investors who take the same risk level as a crowd of investors. Financial markets have a long memory, which includes past information that not only affects current markets but also affects future markets.\\
 
-记$F(t,t)=F_t$，$dF_t/dt=U_t$，综上可以得表\ref{tabl1}
+A Gaussian process is determined by its mean and covariance functions. Suppose that $\{W_t\}_{t\geq 0}$ is a Gaussian process on the probability space $(\Omega,F,P)$with independent increments,$W_0=0$, that satisfies the following properties
+%\begin{enumerate}[(1)]
+%\item $E(W_t)=0$，$t\geq 0$ is a mean function
+%\item $E(W_t,W_s)=F(t,s)<\infty$，$t,s\geq 0$ is the covariance %function
+%\end{enumerate}
+
+If $F(t,s)=t\wedge s$, then $W_t$ is a standard Brownian motion. If $F(t,s)=1/2(t^{2H}+s^{2H}-|t-s|^{2H})$, then $W_t$  is a fractional Brownian motion with Hurst number H. When $H\in(0,1/2)$, increments are negatively correlated, $W_t$has a short-term dependence and anti-persistence, and its future growth does not follow past trends. When $H\in(1/2,1)$, $W_t$  has a long-term dependence and persistence and future trends will be extended by past growth trends.\\
+
+The covariance function of a bi-fractional process is F$F(t,s)=1/2^K[(t^{2H}+s^{2H})^K-|t-s|^{2HK}]$. It has properties such as auto-correlation and long-memory of fractional process, and when $2HK=1$, $W_t$ is a semi-martingale.\\
+The sub-fractional process also has auto-correlation and long-memory properties, but it has a faster degradation speed than does fractional Brownian motion. Its covariance function is $F(t,s)=t^{2H}+s^{2H}-1/2(|t+s|^{2H}+|t-s|^{2H})$.\\
+
+Mixed fractional Brownian motion is a linear combination of standard Brownian motion and fractional Brownian motion. Suppose$B_t$ is a Brownian motion and $B_t^H$ is a fractional Brownian motion; then, $W_t=\alpha B_t+\beta B_t^H$, where $\alpha,\beta \in R$ and its covariance function is  $F(t,s)=\alpha^2(t\wedge s)+\beta(t^{2H}+s^{2H}-|t-s|^{2H})/2$ 
+%We express $F(t,t)=F_t$，$dF_t/dt=U_t$ and provide a summary of each motion in Table \ref{tabl1}：
 \begin{table}[htbp]
 \centering
 \caption{各种高斯过程的协方差函数}
