@@ -72,11 +72,11 @@ Mathematics
 \vfill % Fill the rest of the page with whitespace
 \end{titlepage}
 \newpage
-%\begin{abstract}
+\begin{abstract}
 This study extends the Parisian option pricing model to general Gaussian processes to adapt more asset pricing model assumptions. This study uses a Wick-Ito integral to derive the consecutive and cumulative Parisian option pricing PDEs under Gaussian processes and construct an unconditionally stable implicit difference scheme. Additionally, a numerical method with efficient computation, namely, a chasing algorithm, is used to solve the pricing problem. When analysing the example of the price of consecutive and cumulative Parisian options under any Gaussian process, because the counter is not zero, the cumulative Parisian option is more likely a knock-out option, and the price is lower than that of the consecutive Parisian option. The variables that affect the prices of the Parisian option under a Gaussian process are a slow-growing variance function, smaller volatility, more likely profit and loss forecasts, steeper graph of the price of the Parisian option, and higher peak value.
 
 {\bf Key Words: }Parisian Option, Gaussian Process, Chasing Algorithm, Brownian Motion, Implicit Difference Equations
-%\end{abstract}
+\end{abstract}
 
 \section{Introduction}
 A Parisian option is a complex, path-dependent option that can be classified as cumulative or consecutive depending on the duration time. A consecutive Parisian option is the price of an underlying asset with a required barrier level that is continuous and can remain for some time; it can knock-in or knock-out above or below the barrier. A cumulative Parisian option is an asset price that needs to accumulate above or below the barrier level for some time to knock-in or knock-out with an optional maturity time as the limit. For every knock-in or knock-out time, it continues to accumulate after the pre-setting time. The pre-setting time determines whether the option is triggered. A cumulative Parisian option is more likely to trigger the barrier level than a consecutive Parisian option, depending on the option conditions. In the knock-out option, the price of a consecutive Parisian option is higher than that of the cumulative Parisian option; it is opposite for the knock-in option. The Parisian option is mainly used in the foreign exchange market and can have hybrid derivative pricing. For example, the foreign exchange Parisian option can reduce the impact of the exchange rate; it changes option prices to avoid market speculation. In a convertible bond, conversion and redemption clauses contain Parisian option features.
@@ -103,7 +103,8 @@ The covariance function of a bi-fractional process is F$F(t,s)=1/2^K[(t^{2H}+s^{
 The sub-fractional process also has auto-correlation and long-memory properties, but it has a faster degradation speed than does fractional Brownian motion. Its covariance function is $F(t,s)=t^{2H}+s^{2H}-1/2(|t+s|^{2H}+|t-s|^{2H})$.\\
 
 Mixed fractional Brownian motion is a linear combination of standard Brownian motion and fractional Brownian motion. Suppose$B_t$ is a Brownian motion and $B_t^H$ is a fractional Brownian motion; then, $W_t=\alpha B_t+\beta B_t^H$, where $\alpha,\beta \in R$ and its covariance function is  $F(t,s)=\alpha^2(t\wedge s)+\beta(t^{2H}+s^{2H}-|t-s|^{2H})/2$ 
-%We express $F(t,t)=F_t$，$dF_t/dt=U_t$ and provide a summary of each motion in Table \ref{tabl1}：
+We express $F(t,t)=F_t$，$dF_t/dt=U_t$ and provide a summary of each motion in Table \ref{tabl1}：
+
 \begin{table}[htbp]
 \centering
 \caption{各种高斯过程的协方差函数}

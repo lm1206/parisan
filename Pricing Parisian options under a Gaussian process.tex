@@ -1,0 +1,309 @@
+%% This is file `elsarticle-template-1-num.tex',
+%%
+%% Copyright 2009 Elsevier Ltd
+%%
+%% This file is part of the 'Elsarticle Bundle'.
+%% ---------------------------------------------
+%%
+%% It may be distributed under the conditions of the LaTeX Project Public
+%% License, either version 1.2 of this license or (at your option) any
+%% later version.  The latest version of this license is in
+%%    http://www.latex-project.org/lppl.txt
+%% and version 1.2 or later is part of all distributions of LaTeX
+%% version 1999/12/01 or later.
+%%
+%% The list of all files belonging to the 'Elsarticle Bundle' is
+%% given in the file `manifest.txt'.
+%%
+%% Template article for Elsevier's document class `elsarticle'
+%% with numbered style bibliographic references
+%%
+%% $Id: elsarticle-template-1-num.tex 149 2009-10-08 05:01:15Z rishi $
+%% $URL: http://lenova.river-valley.com/svn/elsbst/trunk/elsarticle-template-1-num.tex $
+%%
+\documentclass[preprint,12pt]{elsarticle}
+
+%% Use the option review to obtain double line spacing
+%% \documentclass[preprint,review,12pt]{elsarticle}
+
+%% Use the options 1p,twocolumn; 3p; 3p,twocolumn; 5p; or 5p,twocolumn
+%% for a journal layout:
+%% \documentclass[final,1p,times]{elsarticle}
+%% \documentclass[final,1p,times,twocolumn]{elsarticle}
+%% \documentclass[final,3p,times]{elsarticle}
+%% \documentclass[final,3p,times,twocolumn]{elsarticle}
+%% \documentclass[final,5p,times]{elsarticle}
+%% \documentclass[final,5p,times,twocolumn]{elsarticle}
+
+%% if you use PostScript figures in your article
+%% use the graphics package for simple commands
+%% \usepackage{graphics}
+%% or use the graphicx package for more complicated commands
+%% \usepackage{graphicx}
+%% or use the epsfig package if you prefer to use the old commands
+%% \usepackage{epsfig}
+
+%% The amssymb package provides various useful mathematical symbols
+\usepackage{amsmath}
+\usepackage{amssymb,bm}
+%% The amsthm package provides extended theorem environments
+\usepackage{amsthm}
+
+%% The lineno packages adds line numbers. Start line numbering with
+%% \begin{linenumbers}, end it with \end{linenumbers}. Or switch it on
+%% for the whole article with \linenumbers after \end{frontmatter}.
+%% \usepackage{lineno}
+
+%% natbib.sty is loaded by default. However, natbib options can be
+%% provided with \biboptions{...} command. Following options are
+%% valid:
+
+%%   round  -  round parentheses are used (default)
+%%   square -  square brackets are used   [option]
+%%   curly  -  curly braces are used      {option}
+%%   angle  -  angle brackets are used    <option>
+%%   semicolon  -  multiple citations separated by semi-colon
+%%   colon  - same as semicolon, an earlier confusion
+%%   comma  -  separated by comma
+%%   numbers-  selects numerical citations
+%%   super  -  numerical citations as superscripts
+%%   sort   -  sorts multiple citations according to order in ref. list
+%%   sort&compress   -  like sort, but also compresses numerical citations
+%%   compress - compresses without sorting
+%%
+%% \biboptions{comma,round}
+
+% \biboptions{}
+\newtheorem{definition}{\hspace{2em} Definition}[section] 
+\newtheorem{theorem}[definition]{\hspace{2em}Theorem} 
+\newtheorem{axiom}[definition]{\hspace{2em}Axiom} 
+\newtheorem{lemma}[definition]{\hspace{2em}Lemma} 
+\newtheorem{proposition}[definition]{\hspace{2em}Proposition} 
+\newtheorem{corollary}[definition]{\hspace{2em}Corollary} 
+\newtheorem{remark}{\hspace{2em}Remark}[section] 
+%\journal{Nuclear Physics B}
+
+\begin{document}
+
+\begin{frontmatter}
+
+%% Title, authors and addresses
+
+%% use the tnoteref command within \title for footnotes;
+%% use the tnotetext command for the associated footnote;
+%% use the fnref command within \author or \address for footnotes;
+%% use the fntext command for the associated footnote;
+%% use the corref command within \author for corresponding author footnotes;
+%% use the cortext command for the associated footnote;
+%% use the ead command for the email address,
+%% and the form \ead[url] for the home page:
+%%
+%% \title{Title\tnoteref{label1}}
+%% \tnotetext[label1]{}
+%% \author{Name\corref{cor1}\fnref{label2}}
+%% \ead{email address}
+%% \ead[url]{home page}
+%% \fntext[label2]{}
+%% \cortext[cor1]{}
+%% \address{Address\fnref{label3}}
+%% \fntext[label3]{}
+
+\title{Pricing Parisian options under a Gaussian process}
+
+%% use optional labels to link authors explicitly to addresses:
+%% \author[label1,label2]{<author name>}
+%% \address[label1]{<address>}
+%% \address[label2]{<address>}
+
+\author{Han Yu}
+
+\address{}
+
+\begin{abstract}
+This study extends the Parisian option pricing model to general Gaussian processes to adapt more asset pricing model assumptions. This study uses a Wick-Ito integral to derive the consecutive and cumulative Parisian option pricing PDEs under Gaussian processes and construct an unconditionally stable implicit difference scheme. Additionally, a numerical method with efficient computation, namely, a chasing algorithm, is used to solve the pricing problem. When analysing the example of the price of consecutive and cumulative Parisian options under any Gaussian process, because the counter is not zero, the cumulative Parisian option is more likely a knock-out option, and the price is lower than that of the consecutive Parisian option. The variables that affect the prices of the Parisian option under a Gaussian process are a slow-growing variance function, smaller volatility, more likely profit and loss forecasts, steeper graph of the price of the Parisian option, and higher peak value.
+\end{abstract}
+
+\begin{keyword}
+Parisian Option, Gaussian Process, Chasing Algorithm, Brownian Motion, Implicit Difference Equations
+\end{keyword}
+
+\end{frontmatter}
+
+%%
+%% Start line numbering here if you want
+%%
+% \linenumbers
+
+%% main text
+
+\section{Introduction}
+A Parisian option is a complex, path-dependent option that can be classified as cumulative or consecutive depending on the duration time. A consecutive Parisian option is the price of an underlying asset with a required barrier level that is continuous and can remain for some time; it can knock-in or knock-out above or below the barrier. A cumulative Parisian option is an asset price that needs to accumulate above or below the barrier level for some time to knock-in or knock-out with an optional maturity time as the limit. For every knock-in or knock-out time, it continues to accumulate after the pre-setting time. The pre-setting time determines whether the option is triggered. A cumulative Parisian option is more likely to trigger the barrier level than a consecutive Parisian option, depending on the option conditions. In the knock-out option, the price of a consecutive Parisian option is higher than that of the cumulative Parisian option; it is opposite for the knock-in option. The Parisian option is mainly used in the foreign exchange market and can have hybrid derivative pricing. For example, the foreign exchange Parisian option can reduce the impact of the exchange rate; it changes option prices to avoid market speculation. In a convertible bond, conversion and redemption clauses contain Parisian option features.
+
+The main methods for pricing Parisian options are the probability method and the partial differential equation (PDE) method. Under the framework of Black-Scholes option pricing, Haber, Schonbucher and Wilmott (1999) derived the PDE for a Parisian option using stock price, duration time and terminal time. These three variables were used with an explicit difference method to solve the problem; however, this numerical method converges slowly, and its stability is not good. Anderluha (2008) fixed the boundary and terminal conditions to find the Parisian option PDE using a hitting time simulation to price consecutive and cumulative Parisian options. Kowk and Lau (2001) priced consecutive and cumulative Parisian options by using a forward-shooting grid under a trinomial tree framework. Longstaff and Schwartz (2001) used a least-square Monte Carlo method to price the American-style Parisian option.\\
+
+These models assume that the Parisian option’s underlying asset price follows geometric Brownian motion. However, Dai and Singleton (2000), via an empirical study of the financial markets, suggest that the change in financial asset price is not a random walk but has varying degrees of long-range dependence and auto-correlation. A financial asset logarithm yields a fat-tail distribution rather than a normal distribution. Peters (1989) noted that the fractional market hypothesis uses an R/S algorithm to detect differences in financial markets and shows that fractional and non-cyclical structures exist in financial markets; these characteristics are significantly different from geometric Brownian motion. Instead, fractional, bi-fractional and sub-fractional Brownian motion describe long-range dependence and auto-correlation very well and yield a fat-tail distribution (Xiao et al., 2012; Lei and Nualart, 2009; Yan, Shen and He, 2011). \\
+
+This paper analyses the PDE of consecutive and cumulative Parisian options under various Gaussian processes. First, by introducing the Wick-Ito integral, we construct the PDE for a financial derivative under a complete financial market with no arbitrage opportunity. Then, we set up the boundary and initial conditions for consecutive and cumulative Parisian options under a general Gaussian process. To solve the PDE, we construct numerical difference equations and introduce the chasing algorithm to reduce the complexity of the calculations. Finally, we examine a case study in which we introduce various Gaussian processes into our model and analyse the influence of the parameters.
+
+
+\section{Gaussian Process}
+The financial market is a complex system, and most investors do not have access to adequate information. Investors gain profits while taking risks. In the efficient market hypothesis, noise is defined as the deviation between the price and the value of financial assets. Most investors are noise traders: they normally treat noise information as factual information to trade. Information traders use noise-trader-characteristics to make profits due to a herd mentality. This introduces market excess and volatility, which leads to market volatility clustering. Similar yields on different time scales with similar distributions of frequency, such as auto-correlation in time scales, results from new investors who take the same risk level as a crowd of investors. Financial markets have a long memory, which includes past information that not only affects current markets but also affects future markets.
+
+A Gaussian process is determined by its mean and covariance functions. Suppose that $\{W_t\}_{t\geq 0}$ is a Gaussian process on the probability space $(\Omega,F,P)$with independent increments,$W_0=0$, that satisfies the following properties
+%\begin{enumerate}[(1)]
+%\item $E(W_t)=0$，$t\geq 0$ is a mean function
+%\item $E(W_t,W_s)=F(t,s)<\infty$，$t,s\geq 0$ is the covariance %function
+%\end{enumerate}
+
+If $F(t,s)=t\wedge s$, then $W_t$ is a standard Brownian motion. If $F(t,s)=1/2(t^{2H}+s^{2H}-|t-s|^{2H})$, then $W_t$  is a fractional Brownian motion with Hurst number H. When $H\in(0,1/2)$, increments are negatively correlated, $W_t$has a short-term dependence and anti-persistence, and its future growth does not follow past trends. When $H\in(1/2,1)$, $W_t$  has a long-term dependence and persistence and future trends will be extended by past growth trends.\\
+The covariance function of a bi-fractional process is F$F(t,s)=1/2^K[(t^{2H}+s^{2H})^K-|t-s|^{2HK}]$. It has properties such as auto-correlation and long-memory of fractional process, and when $2HK=1$, $W_t$ is a semi-martingale.\\
+The sub-fractional process also has auto-correlation and long-memory properties, but it has a faster degradation speed than does fractional Brownian motion. Its covariance function is $F(t,s)=t^{2H}+s^{2H}-1/2(|t+s|^{2H}+|t-s|^{2H})$.\\
+Mixed fractional Brownian motion is a linear combination of standard Brownian motion and fractional Brownian motion. Suppose$B_t$ is a Brownian motion and $B_t^H$ is a fractional Brownian motion; then, $W_t=\alpha B_t+\beta B_t^H$, where $\alpha,\beta \in R$ and its covariance function is  $F(t,s)=\alpha^2(t\wedge s)+\beta(t^{2H}+s^{2H}-|t-s|^{2H})/2$ 
+We express $F(t,t)=F_t$，$dF_t/dt=U_t$ and provide a summary of each motion in Table \ref{tabl1}：
+
+\begin{table}[htbp]
+\centering
+\caption{Covariance function of different Brownian motion}
+\label{tabl1}
+\begin{tabular}{ccc}
+\hline
+Brownian motion& $F_t$ & $U_t$ \\
+\hline
+Standard Brownian motion & $t$ & $1$ \\
+Fractional Brownian motion& $t^{2H}$ & $2Ht^{2H-1}$ \\
+Bi-fractional Brownian motion & $t^{2HK}$ & $2HKt^{2HK-1}$ \\
+Sub-fractional Brownian motion & $(2-2^{2H-1})t^{2H}$ & $(4-2^{2H})Ht^{2H-1}$ \\
+Mixed fractional Brownian motion & $\alpha^2t+\beta^2t^{2H}$ & $\alpha^2+2H\beta^2t^{2H-1}$ \\
+\hline
+\end{tabular}
+\end{table}
+
+\section{Wick-Ito Integral}
+When the Gaussian process $W_t$ is neither Markovian nor semi-martingale, Rogers (1997) proved that a path-dependent integral of a financial mathematical model has an arbitrage opportunity. Pricing financial derivatives in a financial market with arbitrage opportunity is unrealistic. Therefore, we use the Wick-Ito integral as follows:
+\begin{equation}
+\int_a^bf(t,\omega)dW_t=\lim_{\| \Pi\| \rightarrow0}\sum^{n-1}_{k=0}f(t_k,\omega)\diamond (W_{t+1}-W_t)
+\end{equation}
+where $\diamond$ is a Wick product. Under such a stochastic integral framework, our financial market is complete and has no arbitrage opportunity.
+Next, we introduce the Wick-Ito formula into the Gaussian process; for a detailed proof, see Nualart and Taqqu (2008).
+
+\begin{lemma}
+\label{x1}
+Suppose that $Y_t$ is the bounded variation of a Gaussian variable, denoted by $F_t=E(Y^2_t)$, There is a class of functions $f(t,y):[0,+\infty]\times R\rightarrow R$ whose partial derivatives $\frac{\partial f}{\partial t}$,$\frac{\partial f}{\partial y}$,$\frac{\partial^2 f}{\partial y^2}$ exist and, together with $f$, are continuous and satisfy the following exponential growth condition:
+\begin{equation}
+|\frac{\partial^k f(t,y)}{\partial y^k}|\leq C_T\exp(c_Ty^2),\quad k=0,1,2
+\end{equation}
+$\forall t\in[0,T]$,$x \in R$,where $C_T,c_T>0$,and satisfy $c_T<\frac{1}{4}\sup_{t\in[0,T]}F_t^{-1}$T
+The integration form of the Wick-Ito formula is expressed by the following:
+\begin{equation}
+f(T,Y_T)=f(0,Y_0)+\int^T_0\frac{\partial f}{\partial y}(t,Y_t)dt+\int^T_0\frac{\partial f}{\partial y}(t,Y_t)\diamond dY_t+\frac{1}{2}\frac{\partial^2 f}{\partial y^2}(t,Y_t)dF_t
+\end{equation}
+The differentiation form of Wick-Ito formula is:
+\begin{equation}
+df(T,Y_T)=f(0,Y_0)+\int^T_0\frac{\partial f}{\partial y}(t,Y_t)dt+\frac{\partial f}{\partial y}(t,Y_t)\diamond dY_t+\frac{1}{2}\frac{\partial^2 f}{\partial y^2}(t,Y_t)dF_t
+\end{equation}
+\end{lemma}
+From Lemma \ref(x1), we can obtain the following theorem:
+Theorem 3.2 Suppose that $W_t$ is a Gaussian process with bounded variation; the underlying asset $S_t$ is a stochastic process and satisfies:
+\begin{equation}
+dS_t=\mu S_tdt+\sigma S_t\diamond dW_t
+\end{equation}
+$V(S_t,t)$  is a financial derivative of $S_t$ that denotes price, $r$ is the risk-free rate, $\sigma$ is the volatility of the stock price, and the Gaussian process is $W_t$. Let $F(t)=E(W^2_t)$，$U_t=\frac{dF(t)}{dt}$. At any time $t\in [0,T]$, $V(S_t,t)$ satisfies the following partial differential equation:
+\begin{equation}
+\label{f1}
+\frac{\partial V}{\partial t}+\frac{1}{2}\sigma^2S^2U_t\frac{\partial V}{\partial S^2}+\mu S\frac{\partial V}{\partial t}=rV
+\end{equation}                 
+\section{Pricing Parisian Option under Gaussian Process}
+Suppose that $S_t$ is a process of stock price and satisfies the following equation:
+\begin{equation}
+dS_t=(r-q)S_t dt+\sigma S_t \diamond dW_t
+\end{equation}
+where $r$ is a riskless interest rate and $\sigma$ is the volatility of stock price. $W_t$ is a Gaussian process such that $F_t=E(W_t^2 )$ and $U_t=(dF_t)/dt$.
+\subsection{Consecutive Parisian Option}
+First, we consider the pricing up-and-out call of the consecutive Parisian option. $J$ is the continuous time length where the stock price $S_t$  is above the barrier level $L$ and is expressed by
+\begin{equation}
+J(t)=t-\sup(t'\leq t|S_t'\leq D)
+\end{equation}
+Then,	
+\begin{equation}
+dJ(t)=\left\{
+\begin{aligned}
+&dt,\quad &S_t>L \\
+&-J(t_-),\quad&S_t=L\\
+&0,\quad&S_t<L&
+\end{aligned}
+\right.
+\end{equation}
+The price of the Parisian option $V$ is a function of asset price $S$, time $t$ and the current numerically valued asset price over barriers in continuous time $J$, denoted by $V=V(S,J,t)$. Let the barrier price be $L>E$; according to the theory of dynamic replication and combing with equation (6), the up-and-out call of the Parisian option satisfies the following PDE:
+\begin{equation}
+\label{eq}
+\frac{\partial V}{\partial t}+H(S-L)\frac{\partial V}{\partial J}+(r-q)S\frac{\partial V}{\partial S}+\frac{1}{2}\sigma^2S^2U\frac{\partial^2 V}{\partial S^2}-rV=0
+\end{equation}
+The intervals that satisfy (10) are $0≤J≤D$,$0≤t≤T$, $0<S<\infty$, and 
+\begin{equation}
+H(x)=\left\{
+\begin{aligned}
+1 \quad x>0 \\
+0 \quad x\leq 0
+\end{aligned}
+\right.
+\end{equation}
+Per the definition of a Parisian option, a knock-out option is the price of an underlying asset over barrier L and the time reached $D$ (as $J=D$), and the value is 0. 
+$$V(S,t,D)=0$$
+Whenever there are $S<L$, $J$ resets to 0. When $J=0$, consider the continuity of $V$, the definite condition is as follows:
+$$V(L,t,J)=V(L,t,0)$$
+When t=T, the option did not knock-out, and we exercise the option’s terminal payoff, which satisfies:
+$$V(S,T,J)=(S-E)^+$$
+When $S<L$, $J=0$, then the option can be denoted by $V(S,t)$  and satisfies the following PDE:
+\begin{equation}
+\label{down}
+\frac{\partial V}{\partial t}+(r-q)S\frac{\partial V}{\partial S}+\frac{1}{2}\sigma^2S^2U_t\frac{\partial^2 V}{\partial S^2}-rV=0
+\end{equation}
+When $S>L$,$0<J<D$, $V(S,t,J)$, it satisfies the following PDE:
+\begin{equation}
+\label{up}
+\frac{\partial V}{\partial t}+\frac{\partial V}{\partial J}+(r-q)S\frac{\partial V}{\partial S}+\frac{1}{2}\sigma^2S^2U_t\frac{\partial^2 V}{\partial S^2}-rV=0
+\end{equation}
+
+
+
+%% The Appendices part is started with the command \appendix;
+%% appendix sections are then done as normal sections
+%% \appendix
+
+%% \section{}
+%% \label{}
+
+%% References
+%%
+%% Following citation commands can be used in the body text:
+%% Usage of \cite is as follows:
+%%   \cite{key}          ==>>  [#]
+%%   \cite[chap. 2]{key} ==>>  [#, chap. 2]
+%%   \citet{key}         ==>>  Author [#]
+
+%% References with bibTeX database:
+
+\bibliographystyle{model1-num-names}
+\bibliography{<your-bib-database>}
+
+%% Authors are advised to submit their bibtex database files. They are
+%% requested to list a bibtex style file in the manuscript if they do
+%% not want to use model1-num-names.bst.
+
+%% References without bibTeX database:
+
+% \begin{thebibliography}{00}
+
+%% \bibitem must have the following form:
+%%   \bibitem{key}...
+%%
+
+% \bibitem{}
+
+% \end{thebibliography}
+
+
+\end{document}
+
+%%
+%% End of file `elsarticle-template-1-num.tex'.
